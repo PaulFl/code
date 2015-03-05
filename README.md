@@ -1,13 +1,11 @@
-#### Code
-
-###Raspberry pi programms
+#Code
 
 ##My raspberry pi developpement folder
 
-#Arduino
+###Arduino
 My Arduino programms made to enhance raspberry functions (pwm, analog input,...) and to communicate with it
 
-#Python
+###Python
 Most if my programms because that's the language I'm learning for now
 I'va made a RCCar (gonna put the ios app to control it soon), a robot which turns when it hits an obstacle
 I've also played with capacitive sensors...
