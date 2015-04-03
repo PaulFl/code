@@ -88,11 +88,7 @@ for j in range(0,500):
 # loop
 while True:
 	total = 0
-<<<<<<< HEAD
 	for j in range(0,20):
-=======
-	for j in range(0,25):
->>>>>>> b5edb4ad020dfd85256998018ca7f4ae25b50146
 		total += CapRead( 17 , 18 );
 	#print(total)
 	if (total > 1900):
