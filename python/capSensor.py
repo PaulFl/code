@@ -6,6 +6,7 @@ import RPIO
 
 timeout = 10000
 total = 0
+total2 = 0
 DEBUG = 0
 stateFile = open("/sys/class/gpio/gpio8/value", "r")
 pin = 8
@@ -13,6 +14,7 @@ led = 21
 RPIO.setup(led, RPIO.OUT)
 RPIO.setup(pin, RPIO.OUT)
 touched = False
+touched2 = False
 RPIO.output(led, RPIO.HIGH)
 
 def CapRead(inPin,outPin):
@@ -58,8 +60,10 @@ def CapRead(inPin,outPin):
 # loop
 while True:
 	total = 0
+	total2 = 0
 	for j in range(0,10):
-		total += CapRead( 17 , 18 );
+		total += CapRead( 17 , 18 )
+		total2 += CapRead(27, 18)
 	#print(total)
 	if (total > 500 and not touched):
 		touched = True
@@ -70,7 +74,16 @@ while True:
 	elif (total < 70):
 		touched = False
 		RPIO.output(led, RPIO.HIGH)
-	time.sleep(0.010)
+		
+	if (total2 > 1650 and not touched2):
+		touched2 = True
+		stateFile.seek(0)
+		state = not bool(int(stateFile.read().rstrip()))
+		RPIO.output(pin, state)
+	elif (total2 < 1000):
+		touched2 = False
+		
+	time.sleep(0.05)
 
 # clean before you leave
 GPIO.cleanup()

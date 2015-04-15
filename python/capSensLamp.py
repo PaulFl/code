@@ -54,51 +54,20 @@ def CapRead(inPin,outPin):
     else:
         return total
 
-#Calibration
-RPIO.output(pin, False)
-total = 0
-for j in range(0,25):
-    total += CapRead(17, 18)
-minimumOff = maximumOff = total
-
-for j in range(0,500):
-    total = 0
-    for i in range(0,25):
-        total += CapRead(17, 18)
-    if (total < minimumOff):
-        minimum0ff = total
-    elif (total > maximumOff):
-        maximum0ff = total
-
-RPIO.output(pin, True)
-total = 0
-for j in range(0,25):
-    total += CapRead(17, 18)
-minimumOn = maximumOff = total
-
-for j in range(0,500):
-    total = 0
-    for i in range(0,25):
-        total += CapRead(17, 18)
-    if (total < minimumOff):
-        minimum0ff = total
-    elif (total > maximumOff):
-        maximum0ff = total
-
 # loop
 while True:
 	total = 0
-	for j in range(0,20):
-		total += CapRead( 17 , 18 );
-	#print(total)
-	if (total > 1900):
+	for j in range(0,30):
+		total += CapRead(17, 18)
+	print(total)
+	if (total > 2100):
 		stateFile.seek(0)
 		state = bool(int(stateFile.read().rstrip()))
 		if (state):
 			state = False
 			RPIO.output(pin, state)
 			time.sleep(0.5)
-	if (total > 4000):
+	if (total > 6000):
 		stateFile.seek(0)
 		state = bool(int(stateFile.read().rstrip()))
 		if (not state):

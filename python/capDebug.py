@@ -6,8 +6,6 @@ import RPIO
 
 timeout = 10000
 total = 0
-DEBUG = 0
-touched = False
 
 def CapRead(inPin,outPin):
     total = 0
@@ -52,15 +50,9 @@ def CapRead(inPin,outPin):
 # loop
 while True:
 	total = 0
-	for j in range(0,25):
-		total += CapRead( 17 , 18 );
+	for j in range(0,10):
+		total += CapRead( 27 , 18)
 	print(total)
-	if (total > 3500 or total < 1600):
-		print("Touched -------------------------")
-	if (total > 500 and not touched):
-		touched = True
-	elif (total < 70):
-		touched = False
-
+	
 # clean before you leave
 GPIO.cleanup()
