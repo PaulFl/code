@@ -9,11 +9,7 @@ total = 0
 DEBUG = 0
 stateFile = open("/sys/class/gpio/gpio8/value", "r")
 pin = 8
-led = 21
-RPIO.setup(led, RPIO.OUT)
 RPIO.setup(pin, RPIO.OUT)
-touched = False
-RPIO.output(led, RPIO.HIGH)
 
 def CapRead(inPin,outPin):
     """
@@ -92,19 +88,29 @@ for j in range(0,500):
 # loop
 while True:
 	total = 0
+<<<<<<< HEAD
 	for j in range(0,25):
+=======
+	for j in range(0,20):
+>>>>>>> origin/master
 		total += CapRead( 17 , 18 );
 	#print(total)
-	if (total > 500 and not touched):
-		touched = True
-		RPIO.output(led, RPIO.LOW)
+	if (total > 1900):
 		stateFile.seek(0)
-		state = not bool(int(stateFile.read().rstrip()))
-		RPIO.output(pin, state)
-	elif (total < 70):
-		touched = False
-		RPIO.output(led, RPIO.HIGH)
-	time.sleep(0.010)
+		state = bool(int(stateFile.read().rstrip()))
+		if (state):
+			state = False
+			RPIO.output(pin, state)
+			time.sleep(0.5)
+	if (total > 4000):
+		stateFile.seek(0)
+		state = bool(int(stateFile.read().rstrip()))
+		if (not state):
+			state = True
+			RPIO.output(pin, state)
+			time.sleep(0.5)
+	#print(state)
+	time.sleep(0.04)
 
 # clean before you leave
 GPIO.cleanup()
