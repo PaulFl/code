@@ -57,10 +57,21 @@ def CapRead(inPin,outPin):
 # loop
 while True:
 	total = 0
+<<<<<<< HEAD
 	for j in range(0,30):
 		total += CapRead(17, 18)
 	print(total)
 	if (total > 2100):
+=======
+<<<<<<< HEAD
+	for j in range(0,25):
+=======
+	for j in range(0,20):
+>>>>>>> origin/master
+		total += CapRead( 17 , 18 );
+	#print(total)
+	if (total > 1900):
+>>>>>>> 78261ec9b49e9d0c0dd1975e9a3fa47826ebfedf
 		stateFile.seek(0)
 		state = bool(int(stateFile.read().rstrip()))
 		if (state):

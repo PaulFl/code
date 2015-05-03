@@ -65,7 +65,7 @@ while True:
 		total += CapRead( 17 , 18 )
 		total2 += CapRead(27, 18)
 	#print(total)
-	if (total > 500 and not touched):
+	if (total > 450 and not touched):
 		touched = True
 		RPIO.output(led, RPIO.LOW)
 		stateFile.seek(0)
@@ -75,7 +75,7 @@ while True:
 		touched = False
 		RPIO.output(led, RPIO.HIGH)
 		
-	if (total2 > 1650 and not touched2):
+	if (total2 > 1200 and not touched2):
 		touched2 = True
 		stateFile.seek(0)
 		state = not bool(int(stateFile.read().rstrip()))

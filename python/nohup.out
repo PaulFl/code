@@ -31138,4 +31138,4 @@
 3653
 4010
 3793
-3838
+3838sudo: ./dev/code/python/capSensor.py: command not found
