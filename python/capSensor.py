@@ -60,29 +60,35 @@ def CapRead(inPin,outPin):
 # loop
 while True:
 	total = 0
-	total2 = 0
+	#total2 = 0
 	for j in range(0,10):
 		total += CapRead( 17 , 18 )
-		total2 += CapRead(27, 18)
+	#	total2 += CapRead(27, 18)
 	#print(total)
-	if (total > 450 and not touched):
+	if (total > 80 and not touched):
 		touched = True
 		RPIO.output(led, RPIO.LOW)
 		stateFile.seek(0)
 		state = not bool(int(stateFile.read().rstrip()))
 		RPIO.output(pin, state)
-	elif (total < 70):
+	elif (total < 50):
 		touched = False
 		RPIO.output(led, RPIO.HIGH)
-		
-	if (total2 > 1200 and not touched2):
-		touched2 = True
-		stateFile.seek(0)
-		state = not bool(int(stateFile.read().rstrip()))
-		RPIO.output(pin, state)
-	elif (total2 < 1000):
-		touched2 = False
-		
+	#stateFile.seek(0)
+	#lampState = bool(int(stateFile.read().rstrip()))
+	#if (total2 > 1400 and not touched2 and  not lampState):
+	#	touched2 = True
+	#	stateFile.seek(0)
+	#	state = not bool(int(stateFile.read().rstrip()))
+	#	RPIO.output(pin, state)
+	#elif (total2 > 2100 and not touched2 and lampState):
+	#	touched2 = True
+	#	stateFile.seek(0)
+	#	state = not bool(int(stateFile.read().rstrip()))
+	#	RPIO.output(pin, state)
+	#elif ((total2 < 1200 and not lampState) or (total2 < 1900 and lampState)):
+	#	touched2 = False
+	#	
 	time.sleep(0.05)
 
 # clean before you leave
