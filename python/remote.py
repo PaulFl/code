@@ -1,5 +1,11 @@
 import XboxController
+import socket
 
+TCP_IP = '192.168.0.14'
+TCP_PORT = 3000
+
+sendSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sendSocket.connect((TCP_IP, TCP_PORT))
 
 def callback(controlId, value):
 	print("Id: ")
@@ -10,23 +16,27 @@ def callback(controlId, value):
 
 def XAxisCallback(value):
 	print("XValue: ", value)
+	sendSocket.send(str(value))
 
-def YAxisCallbacl(value):
+
+def YAxisCallback(value):
 	print("YValue: ", value)
+	sendSocket.send(str(value))
+
 
 xboxCont = XboxController.XboxController(
 		controllerCallBack = None,
 		joystickNo = 0,
 		deadzone = 0.1,
 		scale = 1,
-		invertYAxis = False)
+		invertYAxis = True)
 
 xboxCont.setupControlCallback(
-		self.xboxCont.XboxControls.LTHUMBX,
+		xboxCont.XboxControls.LTHUMBX,
 		XAxisCallback)
 
 xboxCont.setupControlCallback(
-		self.xboxCont.XboxControls.LTHUMBY,
+		xboxCont.XboxControls.LTHUMBY,
 		YAxisCallback)
 
 
